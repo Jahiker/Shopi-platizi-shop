@@ -1,22 +1,19 @@
-import Home from "../Home";
-import MyAccount from "../MyAccount";
-import MyOrder from "../MyOrder";
-import MyOrders from "../MyOrders";
-import NotFound from "../NotFound";
-import SignIn from "../SignIn/SignIn";
+import { BrowserRouter } from 'react-router-dom'
 
-function App() {
-  
+import { AppRoutes } from '../../router/AppRoutes'
+
+import Navbar from '../../components/Navbar'
+import Layout from '../../components/Layout'
+
+function App () {
   return (
-    <>
-      <Home />
-      <MyAccount />
-      <MyOrder />
-      <MyOrders />
-      <NotFound />
-      <SignIn />
-    </>
-  );
+    <BrowserRouter>
+      <Navbar />
+      <Layout>
+        <AppRoutes />
+      </Layout>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
