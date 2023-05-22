@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from '../../axios'
 
 import Card from '../../components/Card'
+import ProductDetail from '../../components/ProductDetail'
 
 const Home = () => {
   const [products, setProducts] = useState(null)
@@ -15,7 +16,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <ProductDetail />
       <div className='grid w-full grid-cols-4 gap-4 p-8'>
         {products?.map((product, index) => (
           <Card key={`${product.id}-${index}`} product={product} />
