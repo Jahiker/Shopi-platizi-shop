@@ -5,12 +5,19 @@ import { PlusCircleIcon, PhotoIcon } from '@heroicons/react/24/outline'
 import { CartContext } from '../../context'
 
 const Card = ({ product }) => {
-  // console.log('🚀 ~ file: index.jsx:4 ~ Card ~ product:', product)
   const context = useContext(CartContext)
 
   const showProduct = (product) => {
     context.handleOpenDetail()
     context.setProductToShow(product)
+  }
+
+  const handleAddProductToCart = (e, product) => {
+    e.stopPropagation()
+
+    context.setCount(context.count + 1)
+    context.setCartProducts([...context.cartProducts, product])
+    context.handleOpenMiniCart()
   }
 
   return (
@@ -32,7 +39,7 @@ const Card = ({ product }) => {
             )}
         <PlusCircleIcon
           className='absolute top-0 right-0 flex items-center justify-center w-6 h-6 m-2 text-black bg-white rounded-full'
-          onClick={() => context.setCount(context.count + 1)}
+          onClick={(e) => handleAddProductToCart(e, product)}
         />
       </figure>
       <p className='flex justify-between gap-3 p-2'>

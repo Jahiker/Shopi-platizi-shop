@@ -6,12 +6,10 @@ import { CartContext } from '../../context'
 const ProductDetail = () => {
   const context = useContext(CartContext)
 
-  console.log('PRODUCT TO SHOW:', context.productToShow)
-
   return (
     <aside
-      className={`w-[360px] h-[calc(100vh-80px)] flex flex-col fixed bg-white right-2 top-[80px] border-black/40 rounded-lg z-10 shadow-2xl p-6 border-2 translate-x-[120%] transition-all duration-100 ${
-        context.productDetailOpen ? 'translate-x-[0%]' : ''
+      className={`w-[360px] h-[calc(100vh-80px)] flex flex-col fixed bg-white right-2 top-[80px] border-black/40 rounded-lg z-10 shadow-2xl p-6 border-2 transition-all duration-100 ${
+        context.productDetailOpen ? 'translate-x-[0%]' : 'translate-x-[120%]'
       }`}
     >
       <div className='flex items-center justify-between'>
@@ -30,9 +28,13 @@ const ProductDetail = () => {
             />
           </figure>
           <div className='py-6'>
-            <p className='text-2xl font-medium text-gray-400'>${context.productToShow.price}</p>
+            <p className='text-2xl font-medium text-gray-400'>
+              ${context.productToShow.price}
+            </p>
             <h5 className='font-bold text-md'>{context.productToShow.title}</h5>
-            <p className='text-sm font-light'>{context.productToShow.description}</p>
+            <p className='text-sm font-light'>
+              {context.productToShow.description}
+            </p>
           </div>
         </>
       )}

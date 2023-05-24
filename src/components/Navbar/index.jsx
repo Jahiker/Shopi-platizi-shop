@@ -94,7 +94,7 @@ const Navbar = () => {
             Sign In
           </NavLink>
         </li>
-        <li className='flex items-center justify-start'><ShoppingBagIcon className='w-4 h-4' /> {context.count}</li>
+        <li className='flex items-center justify-start cursor-pointer' onClick={() => context.setMiniCartOpen(!context.miniCartOpen)}><ShoppingBagIcon className='w-4 h-4' /> {context.count}</li>
       </ul>
     </nav>
   )

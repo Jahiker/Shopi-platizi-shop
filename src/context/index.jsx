@@ -6,6 +6,11 @@ export const CartContext = createContext()
 export const CartProvider = ({ children }) => {
   // Shopping Cart
   const [count, setCount] = useState(0)
+  const [cartProducts, setCartProducts] = useState([])
+  const [miniCartOpen, setMiniCartOpen] = useState(false)
+
+  const handleOpenMiniCart = () => setMiniCartOpen(true)
+  const handleCloseMiniCart = () => setMiniCartOpen(false)
 
   // Product Detail
   const [productDetailOpen, setProductDetailOpen] = useState(false)
@@ -23,7 +28,13 @@ export const CartProvider = ({ children }) => {
         handleOpenDetail,
         handleCloseDetail,
         productToShow,
-        setProductToShow
+        setProductToShow,
+        cartProducts,
+        setCartProducts,
+        miniCartOpen,
+        handleOpenMiniCart,
+        handleCloseMiniCart,
+        setMiniCartOpen
       }}
     >
       {children}

@@ -5,11 +5,13 @@ import { CartProvider } from '../../context'
 
 import Navbar from '../../components/Navbar'
 import Layout from '../../components/Layout'
+import MiniCartAside from '../../components/MiniCartAside'
 
 function App () {
   return (
     <CartProvider>
       <BrowserRouter>
+        <MiniCartAside />
         <Navbar />
         <Layout>
           <AppRoutes />
