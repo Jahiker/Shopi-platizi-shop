@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { XCircleIcon } from '@heroicons/react/24/outline'
 
+import CartItem from '../CartItem'
+
 import { CartContext } from '../../context'
 
 const MiniCartAside = () => {
@@ -18,26 +20,9 @@ const MiniCartAside = () => {
           <XCircleIcon className='w-6 h-6 text-black cursor-pointer' />
         </button>
       </div>
-      <div className='flex flex-col gap-4 mt-10 overflow-y-scroll'>
+      <div className='flex flex-col gap-4 mt-10 overflow-y-scroll scrollbar-thin'>
         {context.cartProducts.map((product) => ((
-          <div key={product.title} className='flex items-center justify-start gap-4'>
-            <figure className='w-[40%]'>
-              <img
-                src={product.images[0]}
-                alt={product.title}
-                className='w-full rounded-lg'
-              />
-            </figure>
-            <div className='py-6'>
-              <p className='text-lg font-medium text-gray-400'>
-                ${product.price}
-              </p>
-              <h5 className='text-sm font-bold'>{product.title}</h5>
-              {/* <p className='text-sm font-light'>
-                {product.description}
-                </p> */}
-            </div>
-          </div>
+          <CartItem key={product.id} product={product} />
         )))}
       </div>
     </aside>
