@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { XCircleIcon } from '@heroicons/react/24/outline'
+import { XCircleIcon, FaceFrownIcon } from '@heroicons/react/24/outline'
 
 import CartItem from '../CartItem'
 
@@ -7,6 +7,12 @@ import { CartContext } from '../../context'
 
 const MiniCartAside = () => {
   const context = useContext(CartContext)
+
+  const handleDeleteProduct = (id) => {
+    const newCartProducts = context.cartProducts.filter(product => product.id !== id)
+    context.setCartProducts([...newCartProducts])
+    context.setCount(newCartProducts.length)
+  }
 
   return (
     <aside
@@ -20,11 +26,20 @@ const MiniCartAside = () => {
           <XCircleIcon className='w-6 h-6 text-black cursor-pointer' />
         </button>
       </div>
-      <div className='flex flex-col gap-4 mt-10 overflow-y-scroll scrollbar-thin'>
-        {context.cartProducts.map((product) => ((
-          <CartItem key={product.id} product={product} />
-        )))}
-      </div>
+      {context.cartProducts?.length > 0
+        ? (
+          <div className='flex flex-col gap-4 mt-10 overflow-y-scroll scrollbar-thin'>
+            {context.cartProducts.map((product) => ((
+              <CartItem key={product.id} product={product} handleDeleteProduct={handleDeleteProduct} />
+            )))}
+          </div>
+          )
+        : (
+          <div className='flex flex-col items-center justify-center gap-4 mt-10 overflow-y-scroll scrollbar-thin'>
+            <h3>Your Cart is Empty</h3>
+            <FaceFrownIcon className='w-10 h-10 text-gray-400' />
+          </div>
+          )}
     </aside>
   )
 }
