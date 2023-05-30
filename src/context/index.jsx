@@ -28,6 +28,9 @@ export const CartProvider = ({ children }) => {
   const handleOpenDetail = () => setProductDetailOpen(true)
   const handleCloseDetail = () => setProductDetailOpen(false)
 
+  // Orders
+  const [order, setOrder] = useState({})
+
   return (
     <CartContext.Provider
       value={{
@@ -43,7 +46,9 @@ export const CartProvider = ({ children }) => {
         miniCartOpen,
         handleOpenMiniCart,
         handleCloseMiniCart,
-        setMiniCartOpen
+        setMiniCartOpen,
+        order,
+        setOrder
       }}
     >
       {children}

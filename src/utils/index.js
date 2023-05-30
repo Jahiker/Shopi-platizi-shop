@@ -6,7 +6,7 @@
 export const totalPrice = (products) => {
   const initialValue = 0
 
-  const totalSum = products.reduce((sum, product) => sum + product.price, initialValue)
+  const totalSum = products?.reduce((sum, product) => sum + product.price, initialValue)
 
   const total = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(totalSum)
 
