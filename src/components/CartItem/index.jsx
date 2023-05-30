@@ -12,7 +12,7 @@ const CartItem = ({ product, handleDeleteProduct }) => {
           className='w-full rounded-lg'
         />
       </figure>
-      <div className='py-6'>
+      <div className='w-full py-6'>
         <div className='flex justify-end'>
           <TrashIcon className='w-4 h-4 text-red-800 cursor-pointer' onClick={() => handleDeleteProduct(product.id)} />
         </div>

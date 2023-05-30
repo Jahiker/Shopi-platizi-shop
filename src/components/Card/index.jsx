@@ -22,6 +22,8 @@ const Card = ({ product }) => {
     context.setCount(context.count + 1)
     context.setCartProducts([...context.cartProducts, product])
     context.handleOpenMiniCart()
+
+    localStorage.setItem('CART_V1', JSON.stringify([...context.cartProducts, product]))
   }
 
   const RenderIcon = () => {
@@ -31,7 +33,7 @@ const Card = ({ product }) => {
 
     if (isInCart) {
       return (
-        <CheckCircleIcon className='absolute top-0 right-0 flex items-center justify-center w-6 h-6 m-2 text-gray-300 bg-white rounded-full cursor-not-allowed' />
+        <CheckCircleIcon className='absolute top-0 right-0 flex items-center justify-center w-6 h-6 m-2 text-white bg-black rounded-full cursor-not-allowed' />
       )
     } else {
       return (

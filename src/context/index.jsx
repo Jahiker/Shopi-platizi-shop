@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import PropType from 'prop-types'
 
 export const CartContext = createContext()
@@ -8,6 +8,15 @@ export const CartProvider = ({ children }) => {
   const [count, setCount] = useState(0)
   const [cartProducts, setCartProducts] = useState([])
   const [miniCartOpen, setMiniCartOpen] = useState(false)
+
+  useEffect(() => {
+    if (!localStorage.getItem('CART_V1')) return
+
+    const initialCartProducts = JSON.parse(localStorage.getItem('CART_V1'))
+
+    setCartProducts(initialCartProducts)
+    setCount(initialCartProducts.length)
+  }, [])
 
   const handleOpenMiniCart = () => setMiniCartOpen(true)
   const handleCloseMiniCart = () => setMiniCartOpen(false)

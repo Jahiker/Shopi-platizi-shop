@@ -4,6 +4,7 @@ import { XCircleIcon, FaceFrownIcon } from '@heroicons/react/24/outline'
 import CartItem from '../CartItem'
 
 import { CartContext } from '../../context'
+import { totalPrice } from '../../utils'
 
 const MiniCartAside = () => {
   const context = useContext(CartContext)
@@ -12,6 +13,7 @@ const MiniCartAside = () => {
     const newCartProducts = context.cartProducts.filter(product => product.id !== id)
     context.setCartProducts([...newCartProducts])
     context.setCount(newCartProducts.length)
+    localStorage.setItem('CART_V1', JSON.stringify([...newCartProducts]))
   }
 
   return (
@@ -28,7 +30,7 @@ const MiniCartAside = () => {
       </div>
       {context.cartProducts?.length > 0
         ? (
-          <div className='flex flex-col gap-4 mt-10 overflow-y-scroll scrollbar-thin'>
+          <div className='flex flex-col gap-1 mt-10 overflow-y-scroll scrollbar-thin max-h-[53vh]'>
             {context.cartProducts.map((product) => ((
               <CartItem key={product.id} product={product} handleDeleteProduct={handleDeleteProduct} />
             )))}
@@ -40,6 +42,12 @@ const MiniCartAside = () => {
             <FaceFrownIcon className='w-10 h-10 text-gray-400' />
           </div>
           )}
+      <div className='w-full border-t-2'>
+        <p className='flex justify-between py-4 text-lg'>
+          <span>Total:</span> <span className='font-bold'>{totalPrice(context.cartProducts)}</span>
+        </p>
+        <a href='#' className='flex items-center justify-center w-full p-4 text-white bg-black rounded-md hover:bg-gray-500'>CHECKOUT</a>
+      </div>
     </aside>
   )
 }
