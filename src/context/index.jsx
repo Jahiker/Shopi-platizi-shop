@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
   const handleCloseDetail = () => setProductDetailOpen(false)
 
   // Orders
-  const [order, setOrder] = useState({})
+  const [order, setOrder] = useState([])
 
   return (
     <CartContext.Provider
