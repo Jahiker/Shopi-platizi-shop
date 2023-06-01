@@ -22,7 +22,7 @@ const MiniCartAside = () => {
   const handleCreateOrder = () => {
     const orderToAdd = {
       id: Date.now(),
-      date: Date.now('D M Y'),
+      date: new Date(Date.now()).toLocaleDateString(),
       products: context.cartProducts,
       countProducts: context.count,
       total: totalPrice(context.cartProducts)
