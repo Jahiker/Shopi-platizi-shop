@@ -21,10 +21,11 @@ const MiniCartAside = () => {
 
   const handleCreateOrder = () => {
     const orderToAdd = {
-      date: Date.now(),
+      id: Date.now(),
+      date: Date.now('D M Y'),
       products: context.cartProducts,
       countProducts: context.count,
-      total: totalPrice()
+      total: totalPrice(context.cartProducts)
     }
 
     context.setOrder([...context.order, orderToAdd])

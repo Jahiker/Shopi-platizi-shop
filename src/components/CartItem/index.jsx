@@ -4,7 +4,7 @@ import { TrashIcon } from '@heroicons/react/24/outline'
 
 const CartItem = ({ product, handleDeleteProduct = null }) => {
   return (
-    <div key={product.title} className='flex items-center justify-start gap-4'>
+    <div className='flex items-center justify-start gap-4'>
       <figure className='w-[40%]'>
         <img
           src={product.images[0]}
