@@ -8,9 +8,10 @@ import { CartContext } from '../../context'
 
 const MyOrders = () => {
   const { order } = useContext(CartContext)
+
   return (
     <div className='w-full p-6'>
-      <div className='flex justify-between items-start'>
+      <div className='flex items-start justify-between'>
         <h1 className='mb-4 text-3xl font-bold'>My Orders</h1>
         <Link to='/'>
           <ChevronDoubleLeftIcon className='w-5 h-5 text-black' />

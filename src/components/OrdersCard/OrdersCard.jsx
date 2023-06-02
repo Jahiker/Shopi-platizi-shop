@@ -1,22 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline'
+import { ArrowRightCircleIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 
 const OrdersCard = ({ order }) => {
   return (
-    <div className='flex items-center justify-start w-full max-w-md gap-4 p-4 mx-auto border border-black'>
-      <div className='w-full py-6'>
-        <div className='flex justify-end'>
-          <Link to={`/my-orders/${order.id}`}>
-            <ArrowLeftCircleIcon
-              className='w-6 h-6 text-black cursor-pointer'
-            />
-          </Link>
+    <div className='flex items-center justify-start w-full max-w-md gap-4 p-6 mx-auto border border-black rounded-lg'>
+      <div className='relative flex items-start justify-between w-full'>
+        <Link to={`/my-order/${order.id}`} className='absolute bottom-[-35%] right-0'>
+          <ArrowRightCircleIcon
+            className='w-6 h-6 text-black cursor-pointer transition-all hover:scale-[1.1] hover:text-gray-500'
+          />
+        </Link>
+
+        <div>
+          <span>{order.date}</span>
+          <h5 className='text-sm font-bold'>{order.countProducts} Products</h5>
         </div>
-        <p className='text-lg font-medium text-gray-400'>${order.total}</p>
-        <span>{order.date}</span>
-        <h5 className='text-sm font-bold'>{order.countProducts} Products</h5>
+        <p className='text-lg font-medium text-gray-400'>{order.total}</p>
       </div>
     </div>
   )

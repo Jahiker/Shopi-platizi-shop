@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect } from 'react'
 import PropType from 'prop-types'
 
+import axios from '../axios'
+
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
@@ -21,6 +23,16 @@ export const CartProvider = ({ children }) => {
   const handleOpenMiniCart = () => setMiniCartOpen(true)
   const handleCloseMiniCart = () => setMiniCartOpen(false)
 
+  // Products list
+  const [products, setProducts] = useState(null)
+
+  useEffect(() => {
+    axios
+      .get('/products')
+      .then((response) => setProducts(response.data))
+      .catch((err) => console.error(err))
+  }, [])
+
   // Product Detail
   const [productDetailOpen, setProductDetailOpen] = useState(false)
   const [productToShow, setProductToShow] = useState(null)
@@ -31,11 +43,15 @@ export const CartProvider = ({ children }) => {
   // Orders
   const [order, setOrder] = useState([])
 
+  // Search
+  const [query, setQuery] = useState('')
+
   return (
     <CartContext.Provider
       value={{
         count,
         setCount,
+        products,
         productDetailOpen,
         handleOpenDetail,
         handleCloseDetail,
@@ -48,7 +64,9 @@ export const CartProvider = ({ children }) => {
         handleCloseMiniCart,
         setMiniCartOpen,
         order,
-        setOrder
+        setOrder,
+        query,
+        setQuery
       }}
     >
       {children}

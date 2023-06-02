@@ -31,6 +31,7 @@ const MiniCartAside = () => {
     context.setOrder([...context.order, orderToAdd])
     context.setCartProducts([])
     context.setCount(0)
+    context.handleCloseMiniCart()
     localStorage.setItem('CART_V1', JSON.stringify([]))
   }
 
@@ -69,7 +70,7 @@ const MiniCartAside = () => {
           <span>Total:</span>{' '}
           <span className='font-bold'>{totalPrice(context.cartProducts)}</span>
         </p>
-        <Link to='/my-orders/last'>
+        <Link to='/my-order/last'>
           <button
             onClick={() => handleCreateOrder()}
             className='flex items-center justify-center w-full p-4 text-white bg-black rounded-md hover:bg-gray-500'
