@@ -23,15 +23,47 @@ export const CartProvider = ({ children }) => {
   const handleOpenMiniCart = () => setMiniCartOpen(true)
   const handleCloseMiniCart = () => setMiniCartOpen(false)
 
-  // Products list
-  const [products, setProducts] = useState(null)
+  // Search
+  const [query, setQuery] = useState('')
+
+  // Categories
+  const [categories, setCategories] = useState(null)
 
   useEffect(() => {
     axios
-      .get('/products')
-      .then((response) => setProducts(response.data))
+      .get('/categories')
+      .then((response) => setCategories(response.data))
       .catch((err) => console.error(err))
   }, [])
+
+  // Products list
+  const [products, setProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [category, setCategory] = useState(null)
+
+  useEffect(() => {
+    setLoading(true)
+    if (category && categories) {
+      const currentCategory = categories.filter(cat => cat.name.toLowerCase() === category.toLowerCase())
+
+      axios
+        .get(`/products/?categoryId=${currentCategory[0].id}`)
+        .then((response) => {
+          setProducts(response.data)
+          setLoading(false)
+        })
+        .catch((err) => console.error(err))
+    } else {
+      axios
+        .get('/products')
+        .then((response) => {
+          setProducts(response.data)
+          setLoading(false)
+        })
+        .catch((err) => console.error(err))
+    }
+  }, [category, categories])
 
   // Product Detail
   const [productDetailOpen, setProductDetailOpen] = useState(false)
@@ -43,8 +75,12 @@ export const CartProvider = ({ children }) => {
   // Orders
   const [order, setOrder] = useState([])
 
-  // Search
-  const [query, setQuery] = useState('')
+  useEffect(() => {
+    const filteredProducts = products.filter((product) =>
+      product.title.toLowerCase().includes(query.toLowerCase())
+    )
+    setFilteredProducts(filteredProducts)
+  }, [query, products])
 
   return (
     <CartContext.Provider
@@ -66,7 +102,10 @@ export const CartProvider = ({ children }) => {
         order,
         setOrder,
         query,
-        setQuery
+        setQuery,
+        loading,
+        filteredProducts,
+        setCategory
       }}
     >
       {children}
