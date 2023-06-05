@@ -47,13 +47,23 @@ export const CartProvider = ({ children }) => {
     if (category && categories) {
       const currentCategory = categories.filter(cat => cat.name.toLowerCase() === category.toLowerCase())
 
-      axios
-        .get(`/products/?categoryId=${currentCategory[0].id}`)
-        .then((response) => {
-          setProducts(response.data)
-          setLoading(false)
-        })
-        .catch((err) => console.error(err))
+      if (currentCategory[0]) {
+        axios
+          .get(`/products/?categoryId=${currentCategory[0].id}`)
+          .then((response) => {
+            setProducts(response.data)
+            setLoading(false)
+          })
+          .catch((err) => console.error(err))
+      } else {
+        axios
+          .get('/products')
+          .then((response) => {
+            setProducts(response.data)
+            setLoading(false)
+          })
+          .catch((err) => console.error(err))
+      }
     } else {
       axios
         .get('/products')
